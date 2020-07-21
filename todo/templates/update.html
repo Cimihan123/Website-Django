@@ -1,0 +1,19 @@
+
+
+{{todo}}
+<form action="" method="POST">
+{% csrf_token %}
+
+<hr>
+<h1>{{i}}</h1>
+<p>{{i.decription}}</p>
+
+
+  
+    Title<br>
+    <input type="text" name="title" ><br>
+ Message<br>
+  <textarea type="message" name="decription" rows="7" cols="70" ></textarea><br>
+
+<button>Submit</button>
+</form>

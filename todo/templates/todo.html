@@ -1,0 +1,45 @@
+
+ {% extends "nav.html" %}
+
+{% block content %}
+
+
+
+   <form action="{% url 'search_results' %}" method="get">
+<div class="topnav">
+<a class="active" href="#home">Home</a>
+<a  class="active" href="#about">About</a>
+<a  class="active" href="#contact">Contact</a>
+<a class="active" href="{% url 'logout' %}">Logout</a>
+
+
+
+  <input name="q" type="text" placeholder="Search...">
+
+
+</form>
+</div>
+
+
+<br><br>
+
+
+<form action="" method="POST">
+{% csrf_token %}
+{% for i in todo %}
+
+<hr>
+<h1>{{i}}</h1>
+<p>{{i.decription}}</p> {{i.date_todo}}<br>
+<a href="{% url 'update' i.id  %}">Update</a>
+<a href="{% url 'delete' i.id  %}">Delete</a>
+{% endfor %}<hr>    
+    Title<br>
+    <input type="text" name="title" ><br>
+ Message<br>
+  <textarea type="message" name="decription" rows="7" cols="70" ></textarea><br>
+
+<button>Submit</button>
+</form>
+
+{% endblock content %}

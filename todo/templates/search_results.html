@@ -1,0 +1,13 @@
+
+<h1>Search Results</h>
+<ul>
+  {% for i in object_list %}
+    <ul><li>
+    <p>{{i.decription}}</p> {{i.date_todo}}<br>
+    <a href="{% url 'update' i.id  %}">Update</a>
+    <a href="{% url 'delete' i.id  %}">Delete</a>
+    </li>
+    </ul>
+  {% endfor %}
+</ul>
+
