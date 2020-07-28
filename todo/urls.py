@@ -10,6 +10,7 @@ urlpatterns = [
     path('', views.todo,name='index'),
     path('update/<str:pk>', views.update,name='update'),
     path('delete/<str:pk>', views.delete,name='delete'),
+    path('detail/<str:pk>', views.detailView,name='detail'),
     path('search/', SearchResultsView.as_view(), name='search_results'),
     path('signup/',views.signup,name='signup'),
     path('login/',views.login_user,name='login'),

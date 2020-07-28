@@ -1,7 +1,9 @@
-from .models import Todo
-from django.forms import ModelForm
+from .models import *
+from django.forms import ModelForm,Form
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django import forms
+
 
 
 
@@ -9,6 +11,17 @@ class todoForm(ModelForm):
     class Meta:
         model = Todo
         fields = '__all__'
+        
+
+
+class commenForm(forms.ModelForm):
+    name = forms.CharField(widget=forms.TextInput(attrs={"placeholder" : "name"}),max_length='20')    
+    comment = forms.CharField(label='comment',widget=forms.Textarea(attrs={"placeholder" : "comment"}))
+    class Meta:
+        model = Comment
+        fields = ('name','comment')
+        
+
 
 
 
@@ -24,3 +37,4 @@ class signupForm(UserCreationForm):
             user.save()
         return user
         
+

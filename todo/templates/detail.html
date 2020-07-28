@@ -1,0 +1,21 @@
+<strong style="color: blue;">Description:</strong>
+<h1 style="color: red;">{{detail.decription}}</h1>
+<hr>
+<strong style="color: blue;">Comments</strong>
+<br>Total Comments: {{comments.count}}<br><br>
+{% for i in comments %}
+
+name:{{i.name}}<br>
+comment:{{i.comment}}
+<br><br>
+{% endfor %}
+<hr>
+
+
+<form action="" method="POST">
+{% csrf_token %}
+    {{form.as_p}}
+
+<input type='submit' class='btn btn-info'></input>
+</form>
+

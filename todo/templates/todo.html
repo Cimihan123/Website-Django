@@ -30,9 +30,11 @@
 
 <hr>
 <h1>{{i}}</h1>
-<p>{{i.decription}}</p> {{i.date_todo}}<br>
+ {{i.date_todo}}<br>
+ <a href="{% url 'detail' i.id  %}">Detail</a>
 <a href="{% url 'update' i.id  %}">Update</a>
 <a href="{% url 'delete' i.id  %}">Delete</a>
+
 {% endfor %}<hr>    
     Title<br>
     <input type="text" name="title" ><br>
@@ -41,5 +43,25 @@
 
 <button>Submit</button>
 </form>
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if todo.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ todo.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ todo.number }} of {{ todo.paginator.num_pages }}.
+        </span>
+
+        {% if todo.has_next %}
+            <a href="?page={{ todo.next_page_number }}">next</a>
+            <a href="?page={{ todo.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+
+
 
 {% endblock content %}

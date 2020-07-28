@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator
 # Create your views here.
 
 def signup(request):
@@ -72,6 +73,13 @@ def todo(request):
     template_name = 'todo.html'
     title = Todo.objects.all()
 
+  
+    paginator = Paginator(title, 2)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+
     form = todoForm()
 
     if request.method == 'POST':
@@ -83,7 +91,8 @@ def todo(request):
 
     context = {
 
-        'todo' : title,
+        'todo' : page_obj,
+       
     }
 
     return render(request,template_name,context)
@@ -94,15 +103,15 @@ def todo(request):
 def update(request,pk):
 
     template_name = 'update.html'
-    title = Todo.objects.get(id=pk)
 
-    form = todoForm(instance=title)
+    title = Todo.objects.get(pk=pk)
+    form = todoForm()
 
     if request.method == 'POST':
         form = todoForm(request.POST,instance=title)
         if form.is_valid():
             form.save()
-            return redirect('index')
+           
 
     context = {
 
@@ -144,3 +153,35 @@ class SearchResultsView(ListView):
         Q(title__icontains=query) | Q(decription__icontains=query)
         )
         return object_list
+
+
+
+
+
+def detailView(request,pk):
+    template_name = 'detail.html'
+    detail = Todo.objects.get(pk=pk)
+   
+    comments = Comment.objects.filter(todo=detail)
+
+    form = commenForm()
+    if request.method == 'POST':
+        form = commenForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.todo = detail
+            comment.save()
+            return redirect('detail', pk=detail.pk)
+           
+           
+           
+    context = {
+      'detail' : detail,
+      'form' : form,
+      'comments' : comments
+
+
+    }
+    return render(request,template_name,context)
+
+
