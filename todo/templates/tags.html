@@ -1,0 +1,58 @@
+{% extends "nav.html" %}
+{% block body %}
+
+
+<div class="container">
+
+<div class="row justify-content-center" >
+
+{% for i in todo %}
+<div class="col-md-4">
+
+    <div class="card" style="width: 20rem;">
+        <img src="{{i.image.url}}" style="width: 300px; height: 200px;" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{i.title}}</h5>
+          <p class="card-text">{{i.decription|safe}}</p><br>
+          <h1>{{i}}</h1>
+ {{i.date_todo}}<br>
+
+ <a href="{% url 'detail' i.id  %}">Detail</a>
+ {% if user.is_authenticated %}
+
+<a href="{% url 'update' i.id  %}">Update</a>
+<a href="{% url 'delete' i.id  %}">Delete</a>
+
+{% endif %}
+        </div>
+      </div><br>
+</div>{% endfor %}
+<hr>
+</div>
+    
+
+
+
+</div>
+
+<div class="text-center">
+
+    <span class="step-links">
+        {% if todo.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ todo.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ todo.number }} of {{ todo.paginator.num_pages }}.
+        </span>
+
+        {% if todo.has_next %}
+            <a href="?page={{ todo.next_page_number }}">next</a>
+            <a href="?page={{ todo.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+
+</div>
+
+    {% endblock body %}

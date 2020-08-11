@@ -1,7 +1,5 @@
 from .models import *
 from django.forms import ModelForm,Form
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django import forms
 
 
@@ -25,16 +23,22 @@ class commenForm(forms.ModelForm):
 
 
 
-class signupForm(UserCreationForm):
+class PostForm(ModelForm):
     class Meta:
-        model = User
-        fields = ("username", "email", "password1", "password2")
+        model = Todo
+        fields =  '__all__'
 
-    def save(self, commit=True):
-        user = super(signupForm, self).save(commit=False)
-        user.email = self.cleaned_data["email","username"]
-        if commit:
-            user.save()
-        return user
+        widgets = {
+
+
+        
+            'title' : forms.TextInput(attrs={'placeholder' : 'title'}),
+            'decription' : forms.TextInput(attrs={'placeholder' : 'decription'}),
+          
+                
+        }
+
+        
+
         
 

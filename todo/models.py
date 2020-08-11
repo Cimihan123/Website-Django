@@ -1,13 +1,27 @@
 from django.db import models
-
+from ckeditor.fields import RichTextField
 # Create your models here.
+
+
+Tags_Chocies = (
+
+    ('computer' , 'computer'),
+    ('books' , 'books'),
+    ('furniture' , 'furniture'),
+
+)
+
 
 
 class Todo(models.Model):
 
     title = models.CharField(max_length = 20)
     date_todo = models.DateTimeField(auto_now=True , blank=True)
-    decription = models.CharField(max_length = 200)
+    decription = RichTextField(max_length = 200)
+    active = models.BooleanField(default=False)
+    image = models.ImageField(upload_to='todopics')
+    tags = models.CharField(choices=Tags_Chocies,max_length=10)
+
 
     def __str__(self):
 

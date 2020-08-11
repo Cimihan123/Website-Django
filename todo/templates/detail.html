@@ -1,13 +1,30 @@
-<strong style="color: blue;">Description:</strong>
-<h1 style="color: red;">{{detail.decription}}</h1>
+
+{% extends "nav.html" %}
+{% block body %}
+
+<div class="container">
+<div class="row justify-content-center" >
+   <div class="card" style="width: 100rem;">
+        <img src="{{detail.image.url}}" style="width: 300px; height: 200px;" class="card-img-top" alt="...">
+        <div class="card-body">
+       
+        
+    
+        <h5 style="color: red;" class="card-title">{{detail.title}}</h5>
+          <p style="color: purple   ;" class="card-text">{{detail.decription|safe}}</p><br>
+
+<div>
+</div>
 <hr>
 <strong style="color: blue;">Comments</strong>
 <br>Total Comments: {{comments.count}}<br><br>
 {% for i in comments %}
 
-name:{{i.name}}<br>
-comment:{{i.comment}}
-<br><br>
+<h5 style="color: purple ;" >-  {{i.name}}</h5>
+
+
+<h5 style="color: grey ;" >{{i.comment}}</h5>
+
 {% endfor %}
 <hr>
 
@@ -18,4 +35,11 @@ comment:{{i.comment}}
 
 <input type='submit' class='btn btn-info'></input>
 </form>
+</div>
 
+
+</div>
+
+
+
+    {% endblock body %}
