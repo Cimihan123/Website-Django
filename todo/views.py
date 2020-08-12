@@ -137,15 +137,15 @@ def delete(request,pk):
 
 
 
-class SearchResultsView(ListView):
-    model = Todo
-    template_name = 'search_results.html'
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        object_list = Todo.objects.filter(
-        Q(title__icontains=query) | Q(decription__icontains=query)
-        )
-        return object_list
+# class SearchResultsView(ListView):
+#     model = Todo
+#     template_name = 'search_results.html'
+#     def get_queryset(self):
+#         query = self.request.GET.get('q')
+#         object_list = Todo.objects.filter(
+#         Q(title__icontains=query) | Q(decription__icontains=query)
+#         )
+#         return object_list
 
 
 
